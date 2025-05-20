@@ -37,9 +37,12 @@ char *Utils::rstrstr (const char *a, const char *b) {
   if (b_len > a_len)
     return nullptr;
 
-  for (const char *s = a + a_len - b_len; s >= a; --s) {
+  for (const char *s = a + a_len - b_len; s >= a;) {
     if (!strncmp(s, b, b_len))
       return const_cast<char *>(s);
+    if (s == a)
+      break;
+    --s;
   }
 
   return nullptr;
